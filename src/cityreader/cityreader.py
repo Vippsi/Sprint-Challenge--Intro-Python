@@ -8,7 +8,7 @@ class City:
     self.lon = lon
 
   def __str__(self):
-    return f"{self.name}: {self.lat}, {self.lon}"
+    return f"{self.name}, {self.lat}, {self.lon}"
 
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
@@ -40,8 +40,10 @@ def cityreader(cities=[]):
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
-for c in cities:
-    print(c)
+# for c in cities:
+#     print(c)
+
+
 
 # STRETCH GOAL!
 #
@@ -74,11 +76,42 @@ for c in cities:
 
 # TODO Get latitude and longitude values from the user
 
+lat1lon1 = input("Please enter the first lat-lon node ")
+lat2lon2 = input("Please enter the second lat-lon node ")
+
+lat1 = lat1lon1.split()[0]
+lon1 = lat1lon1.split()[1]
+print(lon1) 
+
+lat2 = lat2lon2.split()[0]
+lon2 = lat2lon2.split()[1]
+
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # within will hold the cities that fall within the specified region
+  # within = [City for city in cities if city.lat < lat1 and city.lat > lat2 and city.lon < lon1 and city.lon > lon2]
   within = []
+
+  if lat1 > lat2:
+    bigLat = lat1
+    smallLat = lat2
+  else:
+    smallLat = lat1
+    bigLat = lat2 
+   
+
+  if lon1 > lon2:
+    bigLon = lon1
+    smallLon = lon2
+  else:
+    smallLon = lon1
+    bigLon = lon2
+   
+  for city in cities:
+    if  (city.lat > smallLat and city.lat < bigLat) and (city.lon < bigLon and city.lon > smallLon):
+      within.append(City(city.name, city.lat, city.lon))
   
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
 
   return within
+#City(city.name, city.lat, city.lon)
